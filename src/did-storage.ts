@@ -14,8 +14,10 @@ export abstract class DidStorage {
     body["issuer"] = verificationMethod;
     body["issuanceDate"] = new Date().toISOString();
 
-    // Determine and set the id
-    body["@id"] = `${verificationMethod}:${didPath}`;
+    // Determine and set the did subject. Ensure that there is no conflicting @id.
+    // https://www.w3.org/TR/did-core/#did-subject
+    body["id"] = `${verificationMethod}:${didPath}`;
+    delete body["@id"];
 
     // Sign, store and return the credential
     const signed = await signVerifiableCredential(

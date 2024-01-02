@@ -1,7 +1,7 @@
 {
   "name": "@fabianscheidt/did-document-solution",
   "description": "Signs DID documents, stores them and makes them available through did:web.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.ts",
   "license": "MIT",
   "scripts": {
