@@ -51,7 +51,10 @@ app.post("/:didPath/did.json", async (req, res) => {
     res.status(201).send(doc);
   } catch (e) {
     console.error(e);
-    res.status(500).send({ error: "Internal Server Error" });
+    const message =
+      e && typeof e === "object" && "message" in e ? e.message : "";
+    const error = `Internal Server Error${message ? ": " + message : ""}`;
+    res.status(500).send({ error });
   }
 });
 

@@ -9,14 +9,29 @@ export abstract class DidStorage {
     hostname: string,
     didPath: string,
   ) {
-    // Determine verification method and use it as issuer
+    // Determine verification method and did subject
     const verificationMethod = `did:web:${hostname}`;
+    const didSubject = `${verificationMethod}:${didPath}`;
+
+    // Do not sign again, if signature is already present
+    if ("issuer" in body && "issuanceDate" in body && "proof" in body) {
+      if (body["id"] !== didSubject) {
+        throw new Error(
+          `A signature is present, but the subject ${body["id"]} does not match the target ${didSubject}`,
+        );
+      }
+      await this.storeDidDocument(body, didPath);
+      return body;
+    }
+
+    // Determine verification method and use it as issuer
+
     body["issuer"] = verificationMethod;
     body["issuanceDate"] = new Date().toISOString();
 
     // Determine and set the did subject. Ensure that there is no conflicting @id.
     // https://www.w3.org/TR/did-core/#did-subject
-    body["id"] = `${verificationMethod}:${didPath}`;
+    body["id"] = didSubject;
     delete body["@id"];
 
     // Sign, store and return the credential

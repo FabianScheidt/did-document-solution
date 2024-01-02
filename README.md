@@ -5,6 +5,7 @@ Signs DID documents, stores them and makes them available through [did:web](http
 This service provides a POST endpoint to store DID documents. Before storing, documents are assigned an `@id`, which is
 inferred from the request URL. The document is [signed](https://github.com/FabianScheidt/verifiable-credential-signer)
 and a suitable `issuer`, `issuanceDate` and `verificationMethod` is added. Note that existing documents are overwritten.
+The signature is only updated if no signature is present.
 
 Stored documents can be retrieved through a GET endpoint. The corresponding public key is
 [served](https://github.com/FabianScheidt/did-web-verification-method-server) as well.
