@@ -24,8 +24,7 @@ export abstract class DidStorage {
       return body;
     }
 
-    // Determine verification method and use it as issuer
-
+    // Set issuer and issuance date
     body["issuer"] = verificationMethod;
     body["issuanceDate"] = new Date().toISOString();
 
