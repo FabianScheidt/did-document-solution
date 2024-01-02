@@ -1,4 +1,5 @@
 import * as process from "process";
+import * as path from "path";
 import * as express from "express";
 import {
   getDidDocumentHandler as verificationMethodDid,
@@ -19,7 +20,8 @@ const ADD_ROOT_CERT = process.env.ADD_ROOT_CERTIFICATE
   ? process.env.ADD_ROOT_CERTIFICATE.toLowerCase() === "true"
   : true;
 const PORT = process.env.PORT ?? 3000;
-const STORAGE_PATH = process.env.STORAGE_PATH ?? process.cwd();
+const STORAGE_PATH =
+  process.env.STORAGE_PATH ?? path.join(process.cwd(), "did-documents");
 
 const app = express();
 app.set("json spaces", 2);

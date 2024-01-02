@@ -21,6 +21,7 @@ export class FileBasedDidStorage extends DidStorage {
     body: JsonLdObj,
     didPath: string,
   ): Promise<void> {
+    await fs.mkdir(this.storageDir, { recursive: true });
     const filePath = this.getFilePath(didPath);
     await fs.writeFile(filePath, JSON.stringify(body, null, 2));
   }
