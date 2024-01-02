@@ -32,3 +32,11 @@ The service is configured via environment variables.
 | `GET  https://<domain>/.well-known/did.json` | `did:web:<domain>`            | Returns the verification method            |
 | `POST https://<domain>/<did-path>/did.json`  | `did:web:<domain>:<did-path>` | Signs stores and returns the request body. |
 | `GET  https://<domain>/<did-path>/did.json`  | `did:web:<domain>:<did-path>` | Returns a previously stored document.      |
+
+## Deployment
+
+If you use Docker, there is a prebuilt image available, which is kept up to date with this repository:
+[fabisch/did-document-solution:latest](https://hub.docker.com/r/fabisch/did-document-solution)
+
+If you are looking to deploy this on Kubernetes, where you already have your TLS certificate stored in a secret, you
+may find [this gist](https://gist.github.com/FabianScheidt/7b03806503b05d295cc8a9fcd62df2d9) useful.
