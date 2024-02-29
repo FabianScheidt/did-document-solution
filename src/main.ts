@@ -22,6 +22,8 @@ const ADD_ROOT_CERT = process.env.ADD_ROOT_CERTIFICATE
 const PORT = process.env.PORT ?? 3000;
 const STORAGE_PATH =
   process.env.STORAGE_PATH ?? path.join(process.cwd(), "did-documents");
+const DEFAULT_SIGNATURE_FLAVOUR =
+  process.env.DEFAULT_SIGNATURE_FLAVOUR ?? "Gaia-X";
 
 const app = express();
 app.set("json spaces", 2);
@@ -42,11 +44,27 @@ app.post("/:didPath/did.json", async (req, res) => {
     res.status(400).send({ error: "Invalid request body" });
   }
 
+  const flavour =
+    req.headers["x-signature-flavour"] ?? DEFAULT_SIGNATURE_FLAVOUR;
+  if (typeof flavour !== "string") {
+    res.status(400).send({
+      message: "Received more than one value for X-Signature-Flavour",
+    });
+    return;
+  }
+  if (flavour !== "Specification" && flavour !== "Gaia-X") {
+    res
+      .status(400)
+      .send({ message: "Received invalid value for X-Signature-Flavour" });
+    return;
+  }
+
   try {
     const doc = await didStorage.signAndStoreDidDocument(
       req.body,
       req.hostname,
       req.params["didPath"],
+      { flavour },
     );
     res.status(201).send(doc);
   } catch (e) {

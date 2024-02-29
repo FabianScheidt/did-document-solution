@@ -8,6 +8,7 @@ export abstract class DidStorage {
     body: JsonLdObj,
     hostname: string,
     didPath: string,
+    options?: { flavour?: "Specification" | "Gaia-X"; created?: string },
   ) {
     // Determine verification method and did subject
     const verificationMethod = `did:web:${hostname}`;
@@ -38,6 +39,7 @@ export abstract class DidStorage {
       this.pemPrivateKey,
       verificationMethod,
       body,
+      options,
     );
     await this.storeDidDocument(signed, didPath);
     return signed;

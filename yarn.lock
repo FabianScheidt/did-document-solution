@@ -29,10 +29,10 @@
     ts-node "^10.9.1"
     typescript "^5.1.6"
 
-"@fabianscheidt/verifiable-credential-signer@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@fabianscheidt/verifiable-credential-signer/-/verifiable-credential-signer-1.2.0.tgz#57b496f147b98546c5f9c6abd48e8130e42d2f3b"
-  integrity sha512-pcG5nlDh2hn+2fGzTUOWhnCAUNxendEiTV3/uj46pGODLBmgQaqI50Ckr3MLgnqwupUrEVGP8Ou2YW2O75nGJQ==
+"@fabianscheidt/verifiable-credential-signer@1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@fabianscheidt/verifiable-credential-signer/-/verifiable-credential-signer-1.3.1.tgz#b5b39c5cb9ceabec4f0caa9f095edade07c52101"
+  integrity sha512-80q7uat27UVuCpIJ9gTXBR15QqQEX/GzEmKw6atzYSArC96PROvWCbuOXr4xn+vHVB/YW2xDwW5JMOqWUrDjtg==
   dependencies:
     express "^4.18.2"
     jose "^4.15.4"
