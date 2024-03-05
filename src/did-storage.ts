@@ -8,11 +8,12 @@ export abstract class DidStorage {
     body: JsonLdObj,
     hostname: string,
     didPath: string,
+    issuer: string,
+    verificationMethod: string,
     options?: { flavour?: "Specification" | "Gaia-X"; created?: string },
   ) {
-    // Determine verification method and did subject
-    const verificationMethod = `did:web:${hostname}`;
-    const didSubject = `${verificationMethod}:${didPath}`;
+    // Determine DID subject
+    const didSubject = `did:web:${hostname}:${didPath}`;
 
     // Do not sign again, if signature is already present
     if ("issuer" in body && "issuanceDate" in body && "proof" in body) {
@@ -26,7 +27,7 @@ export abstract class DidStorage {
     }
 
     // Set issuer and issuance date
-    body["issuer"] = verificationMethod;
+    body["issuer"] = issuer;
     body["issuanceDate"] = new Date().toISOString();
 
     // Determine and set the did subject. Ensure that there is no conflicting @id.
