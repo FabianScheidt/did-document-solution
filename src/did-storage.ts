@@ -5,7 +5,7 @@ export abstract class DidStorage {
   public constructor(public readonly pemPrivateKey: string) {}
 
   public async signAndStoreDidDocument(
-    body: JsonLdObj,
+    body: JsonLdObj & { type?: JsonLdObj["@type"] },
     hostname: string,
     didPath: string,
     issuer: string,
@@ -26,20 +26,30 @@ export abstract class DidStorage {
       return body;
     }
 
-    // Set issuer and issuance date
-    body["issuer"] = issuer;
-    body["issuanceDate"] = new Date().toISOString();
+    // Destructure body. Ensure that there is no conflicting @id or @type.
+    const {
+      ["@id"]: atId, // eslint-disable-line @typescript-eslint/no-unused-vars
+      ["@type"]: atType, // eslint-disable-line @typescript-eslint/no-unused-vars
+      ...credential
+    } = {
+      ...body,
 
-    // Determine and set the did subject. Ensure that there is no conflicting @id.
-    // https://www.w3.org/TR/did-core/#did-subject
-    body["id"] = didSubject;
-    delete body["@id"];
+      // Set issuer and issuance date
+      issuer,
+      issuanceDate: new Date().toISOString(),
+
+      // Determine and set the did subject: https://www.w3.org/TR/did-core/#did-subject
+      id: didSubject,
+
+      // Ensure we only have the type once
+      type: body["type"] ?? body["@type"] ?? [],
+    };
 
     // Sign, store and return the credential
     const signed = await signVerifiableCredential(
       this.pemPrivateKey,
       verificationMethod,
-      body,
+      credential,
       options,
     );
     await this.storeDidDocument(signed, didPath);
