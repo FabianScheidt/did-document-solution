@@ -4,6 +4,10 @@
   "version": "0.0.0-PLACEHOLDER",
   "main": "index.ts",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FabianScheidt/did-document-solution.git"
+  },
   "scripts": {
     "start": "ts-node --transpile-only src/main.ts",
     "format": "prettier --write .",
