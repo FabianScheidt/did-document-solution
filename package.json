@@ -1,7 +1,7 @@
 {
   "name": "@fabianscheidt/did-document-solution",
   "description": "Signs DID documents, stores them and makes them available through did:web.",
-  "version": "1.5.3",
+  "version": "0.0.0-PLACEHOLDER",
   "main": "index.ts",
   "license": "MIT",
   "scripts": {
@@ -11,8 +11,8 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@fabianscheidt/did-web-verification-method-server": "1.4.3",
-    "@fabianscheidt/verifiable-credential-signer": "1.4.3",
+    "@fabianscheidt/did-web-verification-method-server": "^1.4.5",
+    "@fabianscheidt/verifiable-credential-signer": "^1.4.6",
     "express": "^4.21.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
