@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@fabianscheidt/did-web-verification-method-server": "^1.4.5",
-    "@fabianscheidt/verifiable-credential-signer": "^1.4.6",
+    "@fabianscheidt/verifiable-credential-signer": "^1.4.7",
     "express": "^4.21.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
