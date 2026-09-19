@@ -16,14 +16,14 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@fabianscheidt/did-web-verification-method-server": "^1.4.7",
-    "@fabianscheidt/verifiable-credential-signer": "^1.4.8",
-    "express": "^4.22.2",
+    "@fabianscheidt/did-web-verification-method-server": "^1.4.9",
+    "@fabianscheidt/verifiable-credential-signer": "^1.4.9",
+    "express": "^5.2.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
   },
   "devDependencies": {
-    "@types/express": "^4.17.21",
+    "@types/express": "^5.0.6",
     "@types/jsonld": "^1.5.15",
     "@types/supertest": "^6.0.3",
     "eslint": "^9.11.1",
